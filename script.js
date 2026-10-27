@@ -23,6 +23,10 @@ function submit() {
 
     a = chamando(lista);
     console.log(a);
+
+    input = document.getElementById("input");
+
+    input.value = a;
 }
 
 function chamando(lista) {
