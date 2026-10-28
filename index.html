@@ -1,22 +1,49 @@
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <link rel="stylesheet" href="style.css">
-    <title>CALCULADORA</title>
+
+    <title>Calculadora da LETA</title>
 </head>
+
 <body>
-    <h1>Calculadora da LETA</h1>
-    <input id="input" type="text">
-    <button id="mais" onclick="add('+')"> + </button>
-    <button id="menos" onclick="add('-')"> - </button>
-    <button id="divisao" onclick="add('/')">  / </button>
-    <button id="multiplica" onclick="add('*')" > * </button>
-    <button id="potencia" onclick="add('**')"> ** </button>
-    <button id="igual" onclick="submit()"> = </button>
+
+    <main class="calculadora">
+        <h1>Calculadora da LETA</h1>
+
+        <input id="input" type="text">
+
+        <div class="botoes">
+            <button id="mais" onclick="add('+')">+</button>
+            <button id="menos" onclick="add('-')">−</button>
+            <button id="divisao" onclick="add('/')">÷</button>
+            <button id="multiplica" onclick="add('*')">×</button>
+            <button id="potencia" onclick="add('**')">xʸ</button>
+            <button id="igual" onclick="submit()">=</button>
+        </div>
+    </main>
+
+    <div class="menu-container">
+        <input type="checkbox" id="menu-toggle">
+        <label for="menu-toggle" class="menu-button">
+            <span></span>
+            <span></span>
+            <span></span>
+        </label>
+        
+        <nav class="menu-itens">
+            <button onclick="mudarOrdem('padrao')">BEDMAS</button>
+            <button onclick="mudarOrdem('editar')">Escolher Ordem</button>
+            <button onclick="mudarOrdem('aleatorio')">Aleatório</button>
+            <button onclick="historico()">Histórico</button>
+        </nav>
+    </div>
 
     <script src="script.js"></script>
-    
+
 </body>
 </html>
