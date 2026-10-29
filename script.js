@@ -2,6 +2,7 @@ const operacao = ['+','-','*','/','**'];
 const numero = ['0','1','2','3','4','5','6','7','8','9'];
 let ordem = 'padrao';
 let historico = {};
+let historico_display = 'nao';
 
 function add(item) {
     input = document.getElementById("input");
@@ -11,7 +12,6 @@ function add(item) {
 
 function gerarAleatorio(min, max, ignorado) {
     let numero;
-
     do {
         numero = Math.floor(Math.random() * (max - min + 1)) + min;
     } while (ignorado.includes(numero));
@@ -57,11 +57,22 @@ function submit() {
 
     const histo_chave = enviado in historico;
     const histo_valor = Object.values(historico).includes(enviado);
+    const quantidade_chaves = Object.keys(historico);
 
     if (histo_chave || histo_valor) {
-        historico[enviado + " "] = a;
+        const quantidadeRepetidos = quantidade_chaves.filter(chave => chave.trim() === String(enviado)).length;
+        const novaChave = String(enviado) + " ".repeat(quantidadeRepetidos);
+
+        historico[novaChave] = a;
     } else {
         historico[enviado] = a;
+    }
+
+    console.log(historico);
+
+    if (historico_display == 'sim') {
+        console.log('entrou , + ', historico)
+        renderizarHistorico();
     }
 
     input.value = a;
@@ -123,6 +134,19 @@ function chamando_aleatorio(lista) {
     return Number(lista[0]);
 }
 
+function renderizarHistorico() {
+    const ul = document.getElementById("historico");
+    ul.innerHTML = '';
+
+    for (const [chave, valor] of Object.entries(historico)) {
+        const li = document.createElement("li");
+        li.innerHTML = `<strong>${chave}:</strong> ${valor}`;
+        ul.appendChild(li);
+    }
+
+    historico_display = 'sim';
+}
+
 function resolvendo(lista, operador) {
     let i = 0;
     let o = 0;
@@ -162,7 +186,7 @@ function resolvendo(lista, operador) {
         }
         
     }
-    console.log(`Lista após operar [${operador}]:`, lista)
+    console.log(`Lista após operar [${operador}]:`, lista);
     return lista
 }
 
